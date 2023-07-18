@@ -1,54 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../providers/category_provider.dart';
 
-class CategoryView extends StatelessWidget {
-  CategoryView({super.key});
-  
-  final List<CategoryItem> categoryItems = [
-    CategoryItem(
-      imageUrl: 'assets/images/category1.png',
-      title: 'Category 1',
-    ),
-    CategoryItem(
-      imageUrl: 'assets/images/category2.png',
-      title: 'Category 2',
-    ),
-    // Add more CategoryItems here
-  ];
-
+class CategoryView extends ConsumerWidget {
+  const CategoryView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return GridView.count(
-        crossAxisCount: 2,
-        childAspectRatio: 1.0,
-        children: categoryItems.map((item) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final categoryList = ref.read(categoryProvider);
+
+    return Expanded(
+      child: GridView(
+        padding: const EdgeInsets.all(35),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          // childAspectRatio: 2 / 3,
+          crossAxisSpacing: 20,
+          mainAxisSpacing: 20,
+        ),
+        children: categoryList.map((item) {
           return Column(
             children: [
-              Image.asset(item.imageUrl),
-              const SizedBox(height: 8.0),
-              Text(
-                item.title,
-                style: const TextStyle(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
+              SizedBox(
+                width: 45,
+                height: 45,
+                child: Image.asset(
+                  item.imageUrl,
+                  fit: BoxFit.cover,
                 ),
               ),
+              const SizedBox(height: 10),
+              Text(item.title,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyMedium),
             ],
           );
         }).toList(),
-      );
+      ),
+    );
   }
-}
-
-class CategoryItem {
-  final String imageUrl;
-  final String title;
-
-  CategoryItem({required this.imageUrl, required this.title});
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: CategoryView(),
-  ));
 }

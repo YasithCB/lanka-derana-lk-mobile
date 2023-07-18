@@ -6,33 +6,6 @@ class ShopPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<CategoryItem> categoryItems = [
-      CategoryItem(
-        imageUrl: 'assets/images/categories/iphone.png',
-        title: 'Electronics',
-      ),
-      CategoryItem(
-        imageUrl: 'assets/images/categories/car1.png',
-        title: 'Vehicles',
-      ),
-      CategoryItem(
-        imageUrl: 'assets/images/categories/iphone.png',
-        title: 'Electronics',
-      ),
-      CategoryItem(
-        imageUrl: 'assets/images/categories/car1.png',
-        title: 'Vehicles',
-      ),
-      CategoryItem(
-        imageUrl: 'assets/images/categories/iphone.png',
-        title: 'Electronics',
-      ),
-      CategoryItem(
-        imageUrl: 'assets/images/categories/car1.png',
-        title: 'Vehicles',
-      )
-      // Add more CategoryItems here
-    ];
 
     return Column(
       children: [
@@ -59,36 +32,7 @@ class ShopPage extends StatelessWidget {
             ),
           ),
         ),
-        Expanded(
-          child: GridView(
-            padding: const EdgeInsets.all(30),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              // childAspectRatio: 2 / 3,
-              crossAxisSpacing: 20,
-              mainAxisSpacing: 20,
-            ),
-            children: categoryItems.map((item) {
-              return Column(
-                children: [
-                  SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: Image.asset(
-                      item.imageUrl,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    item.title,
-                    style: Theme.of(context).textTheme.bodyMedium
-                  ),
-                ],
-              );
-            }).toList(),
-          ),
-        ),
+        CategoryView(),
       ],
     );
   }

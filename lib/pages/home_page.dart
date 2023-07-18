@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/homePage/item_view.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -34,6 +36,8 @@ class HomePage extends StatelessWidget {
               ),
             ],
           ),
+          const SizedBox(height: 15),
+          ItemView(),
         ],
     );
   }

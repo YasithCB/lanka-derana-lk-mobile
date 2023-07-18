@@ -39,6 +39,7 @@ dependencies:
   firebase_core: ^2.15.0
   firebase_auth: ^4.7.0
   flutter_facebook_auth: ^6.0.0
+  flutter_riverpod: ^2.3.6
 
 dev_dependencies:
   flutter_test:
@@ -65,8 +66,34 @@ flutter:
   assets:
     - assets/images/google_logo.png
     - assets/images/facebook_logo.png
+    - assets/images/logo.jpg
+
+    # items
+    - assets/images/items/Nissan FB14.jpg
+    - assets/images/items/Toyota axio car.jpg
+    - assets/images/items/JBL PARTY BOX.jpg
+    - assets/images/items/Vehicles for hire.jpg
+    - assets/images/items/RENT A CAR L 200 CAB.jpg
+    - assets/images/items/Air Tickets.jpg
+    - assets/images/items/Lemongrass oil.jpg
+    - assets/images/items/All kind of Laptop Repairing and Laptop Accessories.jpg
+
+    # catagories
     - assets/images/categories/iphone.png
     - assets/images/categories/car1.png
+    - assets/images/categories/washing-machine.png
+    - assets/images/categories/repair-tools.png
+    - assets/images/categories/office-building.png
+    - assets/images/categories/dog.png
+    - assets/images/categories/suitcase.png
+    - assets/images/categories/football.png
+    - assets/images/categories/smart-watch.png
+    - assets/images/categories/university.png
+    - assets/images/categories/other.png
+    - assets/images/categories/Essentials.png
+    - assets/images/categories/Agriculture.png
+    - assets/images/categories/Work-Overseas.png
+    - assets/images/categories/house.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
