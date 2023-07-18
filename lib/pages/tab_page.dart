@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lanka_derana/pages/shop_page.dart';
+import 'package:lanka_derana/pages/membership_page.dart';
+import 'package:lanka_derana/pages/post_ad_page.dart';
+import 'package:lanka_derana/pages/profile_page.dart';
+import 'package:lanka_derana/pages/search_page.dart';
 
 import 'home_page.dart';
 
@@ -24,9 +27,23 @@ class _TabPageState extends State<TabPage> {
     Widget activePage = const HomePage();
     var activePageTitle = 'LankaDerana.lk';
 
-    if (_selectedPageIndex == 1) {
-      activePage = const ShopPage();
-      activePageTitle = 'Shop';
+    switch (_selectedPageIndex) {
+      case 1:
+        activePage = const ShopPage();
+        activePageTitle = 'Search';
+        break;
+      case 2:
+        activePage = const PostAdPage();
+        activePageTitle = 'Post Your Ads';
+        break;
+      case 3:
+        activePage = const MembershipPage();
+        activePageTitle = 'Membership Details';
+        break;
+      case 4:
+        activePage = const ProfilePage();
+        activePageTitle = 'My Profile';
+        break;
     }
 
     return Scaffold(
@@ -35,44 +52,14 @@ class _TabPageState extends State<TabPage> {
           activePageTitle,
           style: Theme.of(context)
               .textTheme
-              .titleLarge!
-              .copyWith(color: Theme.of(context).colorScheme.onPrimary),
+              .titleMedium!
+              .copyWith(color: Theme.of(context).colorScheme.onPrimary, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: activePage,
-      // body: Column(
-      //   children: [
-      //     Row(
-      //       children: [
-      //         Expanded(
-      //           child: TextButton.icon(
-      //             onPressed: () {},
-      //             icon: const Icon(Icons.location_on),
-      //             label: const Text('Location'),
-      //           ),
-      //         ),
-      //         const SizedBox(width: 6),
-      //         Text(
-      //           '|',
-      //           style: Theme.of(context)
-      //               .textTheme
-      //               .titleLarge!
-      //               .copyWith(color: Theme.of(context).colorScheme.onPrimary),
-      //         ),
-      //         const SizedBox(width: 6),
-      //         Expanded(
-      //           child: TextButton.icon(
-      //             onPressed: () {},
-      //             icon: const Icon(Icons.category_sharp),
-      //             label: const Text('Catagory'),
-      //           ),
-      //         ),
-      //       ],
-      //     ),
-      //   ],
-      // ),
+      
       bottomNavigationBar: BottomNavigationBar(
         items: [
           const BottomNavigationBarItem(
@@ -80,8 +67,8 @@ class _TabPageState extends State<TabPage> {
             label: 'Home',
           ),
           const BottomNavigationBarItem(
-            icon: Icon(Icons.shop_2),
-            label: 'Shop',
+            icon: Icon(Icons.search),
+            label: 'Search',
           ),
           BottomNavigationBarItem(
             icon: Container(
@@ -91,7 +78,10 @@ class _TabPageState extends State<TabPage> {
                 color: Colors.yellow,
                 borderRadius: BorderRadius.circular(20.0),
               ),
-              child: const Icon(Icons.add_circle_rounded,size: 32,),
+              child: const Icon(
+                Icons.add_circle_rounded,
+                size: 32,
+              ),
             ),
             label: 'Post Ad',
           ),
