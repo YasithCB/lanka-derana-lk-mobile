@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lanka_derana/pages/cart_page.dart';
 import 'package:lanka_derana/pages/membership_page.dart';
 import 'package:lanka_derana/pages/post_ad_page.dart';
 import 'package:lanka_derana/pages/profile_page.dart';
@@ -50,16 +51,30 @@ class _TabPageState extends State<TabPage> {
       appBar: AppBar(
         title: Text(
           activePageTitle,
-          style: Theme.of(context)
-              .textTheme
-              .titleMedium!
-              .copyWith(color: Theme.of(context).colorScheme.onPrimary, fontWeight: FontWeight.bold),
+          style: Theme.of(context).textTheme.titleMedium!.copyWith(
+              color: Theme.of(context).colorScheme.onPrimary,
+              fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.primary,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CartPage(),
+                  ));
+            },
+            icon: const Icon(
+              Icons.shopping_cart,
+              color: Colors.white,
+              size: 20,
+            ),
+          ),
+        ],
       ),
       body: activePage,
-      
       bottomNavigationBar: BottomNavigationBar(
         items: [
           const BottomNavigationBarItem(

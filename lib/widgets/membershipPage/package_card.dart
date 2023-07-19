@@ -13,7 +13,7 @@ class PackageCard extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 20),
       child: Card(
         color: bgColor, // Customize the background color of the card
-        elevation: 4.0, // Adjust the card elevation if needed
+        elevation: 2.5, // Adjust the card elevation if needed
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.0), // Rounded corners
         ),

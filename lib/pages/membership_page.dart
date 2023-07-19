@@ -17,7 +17,7 @@ class _MembershipPageState extends State<MembershipPage> {
       child: ListView(
         children: [
           const PackageCard(
-            bgColor: Color.fromARGB(255, 255, 118, 100),
+            bgColor: Color.fromARGB(255, 255, 193, 186),
             title: 'Free\nරු 0',
             featuresList: [
               {'title': 'Validity', 'value': 'Lifetime'},
@@ -31,7 +31,7 @@ class _MembershipPageState extends State<MembershipPage> {
             ],
           ),
           const PackageCard(
-            bgColor: Color.fromARGB(255, 0, 167, 22),
+            bgColor: Color.fromARGB(255, 102, 255, 122),
             title: 'Basic\nරු 500',
             featuresList: [
               {'title': 'Validity', 'value': '60 Days'},
@@ -59,7 +59,7 @@ class _MembershipPageState extends State<MembershipPage> {
             ],
           ),
           const PackageCard(
-            bgColor: Color.fromARGB(255, 0, 172, 14),
+            bgColor: Color.fromARGB(255, 216, 86, 255),
             title: 'Premium\nරු 2,000',
             featuresList: [
               {'title': 'Validity', 'value': '60 Days'},
