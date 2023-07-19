@@ -41,6 +41,8 @@ dependencies:
   flutter_facebook_auth: ^6.0.0
   flutter_riverpod: ^2.3.6
 
+  intl: ^0.17.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

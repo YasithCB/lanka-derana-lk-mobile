@@ -38,7 +38,7 @@ class _TabPageState extends State<TabPage> {
         break;
       case 3:
         activePage = const MembershipPage();
-        activePageTitle = 'Membership Details';
+        activePageTitle = 'Membership Packages';
         break;
       case 4:
         activePage = const ProfilePage();
