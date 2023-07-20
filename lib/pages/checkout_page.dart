@@ -30,6 +30,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
   final List<OrderDetails> _cartItems = cartList;
   double subTotal = 0;
   final total = 0;
+  int _paymentOption = 1;
 
   @override
   void initState() {
@@ -55,7 +56,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
   // Function to go to the next page
   void _goToNextPage() {
-    if (_pageController.page != null && _pageController.page! < 7) {
+    if (_pageController.page != null) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
@@ -229,58 +230,58 @@ class _CheckoutPageState extends State<CheckoutPage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(
+                  const Text(
                     'Shipping Details',
                     style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'First Name',
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Last Name',
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Country / Region',
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Street Address',
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'State (optional)',
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'City',
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Postcode / ZIP',
                       border: OutlineInputBorder(),
                     ),
@@ -294,87 +295,182 @@ class _CheckoutPageState extends State<CheckoutPage> {
   }
 
   Widget _buildPaymentDetailsStep() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        const ListTile(
-          title: Text(
-            'Your Order',
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const ListTile(
+            title: Text(
+              'Your Order',
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-        ),
-        const Divider(),
-        Column(
-          children: [
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: _cartItems.length,
-              itemBuilder: (context, index) {
-                OrderDetails cartItem = _cartItems[index];
-                return ListTile(
-                  title: Text(
-                    cartItem.product,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  subtitle: Text(
-                    'Quantity: ${cartItem.quantity}',
-                    style: Theme.of(context).textTheme.bodyMedium!,
-                  ),
-                  trailing: Text(
-                    'රු ${(cartItem.price * cartItem.quantity).toStringAsFixed(2)}',
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                );
+          const Divider(),
+          Column(
+            children: [
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: _cartItems.length,
+                itemBuilder: (context, index) {
+                  OrderDetails cartItem = _cartItems[index];
+                  return ListTile(
+                    title: Text(
+                      cartItem.product,
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    subtitle: Text(
+                      'Quantity: ${cartItem.quantity}',
+                      style: Theme.of(context).textTheme.bodyMedium!,
+                    ),
+                    trailing: Text(
+                      'රු ${(cartItem.price * cartItem.quantity).toStringAsFixed(2)}',
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+          Container(
+            color: Theme.of(context).colorScheme.primary.withOpacity(0.15),
+            child: ListTile(
+              title: Text(
+                'Subtotal',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium!
+                    .copyWith(fontWeight: FontWeight.bold),
+              ),
+              trailing: Text(
+                'රු${subTotal.toStringAsFixed(2)}',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium!
+                    .copyWith(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+          Container(
+            color: Theme.of(context).colorScheme.primary,
+            child: ListTile(
+              title: Text(
+                'Total',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium!
+                    .copyWith(fontWeight: FontWeight.bold, color: Colors.white),
+              ),
+              trailing: Text(
+                'රු${subTotal.toStringAsFixed(2)}',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium!
+                    .copyWith(fontWeight: FontWeight.bold, color: Colors.white),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          // Payment options
+          const ListTile(
+            title: Text(
+              'Payment Options',
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          RadioListTile<int>(
+            title: const Text('Direct bank transfer'),
+            value: 1,
+            groupValue: _paymentOption,
+            onChanged: (value) {
+              setState(() {
+                _paymentOption = value!;
+              });
+            },
+          ),
+          // Description for the first option
+          Card(
+            margin: const EdgeInsets.only(right: 30, left: 50),
+            child: Visibility(
+              visible: _paymentOption == 1,
+              child: const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  'Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your ad will not be published until the funds have cleared in our account.',
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
+            ),
+          ),
+          RadioListTile<int>(
+            title: const Text('Onepay'),
+            value: 2,
+            groupValue: _paymentOption,
+            onChanged: (value) {
+              setState(() {
+                _paymentOption = value!;
+              });
+            },
+          ),
+          // Description for the 2nd option
+          Card(
+            margin: const EdgeInsets.only(right: 30, left: 50),
+            child: Visibility(
+              visible: _paymentOption == 2,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Image.asset(
+                      'assets/images/logo_onepay.png',
+                      fit: BoxFit.fitWidth,
+                    ),
+                    const SizedBox(height: 10),
+                    const Text(
+                      'Pay by Visa, MasterCard, AMEX, or Lanka QR via onepay.',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          Text(
+            'Your personal data will be used to process your order, support your experience throughout this website,and for other purposes described in our privacy policy.',
+            style: Theme.of(context).textTheme.bodySmall,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 20),
+          SizedBox(
+            width: 400,
+            child: ElevatedButton(
+              onPressed: () {
+                // Implement your purchase logic here
               },
-            ),
-          ],
-        ),
-        Container(
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.15),
-          child: ListTile(
-            title: Text(
-              'SUBTOTAL',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(fontWeight: FontWeight.bold),
-            ),
-            trailing: Text(
-              'රු${subTotal.toStringAsFixed(2)}',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(fontWeight: FontWeight.bold),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateColor.resolveWith(
+                  (states) => Theme.of(context).colorScheme.primary,
+                ),
+              ),
+              child: const Text(
+                'Purchase Now',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
-        ),
-        Container(
-          color: Theme.of(context).colorScheme.primary,
-          child: ListTile(
-            title: Text(
-              'TOTAL',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(fontWeight: FontWeight.bold, color: Colors.white),
-            ),
-            trailing: Text(
-              'රු${subTotal.toStringAsFixed(2)}',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(fontWeight: FontWeight.bold, color: Colors.white),
-            ),
-          ),
-        ),
-      ],
+          const SizedBox(height: 40),
+        ],
+      ),
     );
   }
 }

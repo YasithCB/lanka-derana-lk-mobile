@@ -5,29 +5,16 @@ import 'package:lanka_derana/pages/checkout_page.dart';
 import '../data/cart_data.dart';
 import '../widgets/cartPage/coupon_code.dart';
 
-// Sample Product class to represent products
-class Product {
-  final String title;
-  final double price;
-  final int quantity;
-
-  Product({
-    required this.title,
-    required this.price,
-    required this.quantity,
-  });
-}
-
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
 
   @override
-  _CartPageState createState() => _CartPageState();
+  State<StatefulWidget> createState() {
+    return _CartPageState();
+  }
 }
 
 class _CartPageState extends State<CartPage> {
-  
-
   double get _totalAmount =>
       cartList.fold(0, (sum, item) => sum + (item.price * item.quantity));
 

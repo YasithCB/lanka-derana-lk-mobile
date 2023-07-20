@@ -32,7 +32,7 @@ class ShopPage extends StatelessWidget {
             ),
           ),
         ),
-        CategoryView(),
+        const CategoryView(),
       ],
     );
   }

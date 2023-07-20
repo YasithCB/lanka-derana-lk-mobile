@@ -1,43 +1,39 @@
 import 'package:flutter/material.dart';
 
-class OrderSummaryWidget extends StatelessWidget {
-  final String product;
-  final double price;
-  final double subtotal;
-  final double total;
-
-  OrderSummaryWidget({
-    required this.product,
-    required this.price,
-    required this.subtotal,
-    required this.total,
-  });
+class ItemSearchDelegate extends SearchDelegate<String> {
+  // Implement your search logic here
 
   @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          ListTile(
-            title: Text('Your Order'),
-          ),
-          Divider(),
-          ListTile(
-            title: Text('Product'),
-            subtitle: Text(product),
-            trailing: Text('රු${price.toStringAsFixed(2)}'),
-          ),
-          ListTile(
-            title: Text('SUBTOTAL'),
-            trailing: Text('රු${subtotal.toStringAsFixed(2)}'),
-          ),
-          ListTile(
-            title: Text('TOTAL'),
-            trailing: Text('රු${total.toStringAsFixed(2)}'),
-          ),
-        ],
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: Icon(Icons.clear),
+        onPressed: () {
+          query = '';
+        },
       ),
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: () {
+        close(context, '');
+      },
     );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // Show search results based on the query
+    return Text('Search Results for: $query');
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // Show suggestions while typing in the search bar
+    return Text('Suggestions for: $query');
   }
 }

@@ -69,6 +69,8 @@ flutter:
     - assets/images/google_logo.png
     - assets/images/facebook_logo.png
     - assets/images/logo.jpg
+    - assets/images/logo_onepay.png
+    - assets/images/icon-profile.png
 
     # items
     - assets/images/items/Nissan FB14.jpg
