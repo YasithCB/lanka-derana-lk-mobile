@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:lanka_derana/widgets/searchPage/catagory_view.dart';
 
+import '../models/category.dart';
+import '../widgets/posting_ad_pageviews/after_select_category.dart';
+
 class ShopPage extends StatelessWidget {
   const ShopPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    onSelectCategory(CategoryItem item) {
+      
+    }
 
     return Column(
       children: [
@@ -32,7 +38,7 @@ class ShopPage extends StatelessWidget {
             ),
           ),
         ),
-        const CategoryView(),
+        CategoryView(onTapCategory: onSelectCategory),
       ],
     );
   }

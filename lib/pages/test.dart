@@ -1,39 +1,81 @@
 import 'package:flutter/material.dart';
 
-class ItemSearchDelegate extends SearchDelegate<String> {
-  // Implement your search logic here
+class MainDrawer extends StatelessWidget {
+  const MainDrawer({super.key,  this.onSelectScreen});
+
+  final void Function(String identifier)? onSelectScreen;
 
   @override
-  List<Widget> buildActions(BuildContext context) {
-    return [
-      IconButton(
-        icon: Icon(Icons.clear),
-        onPressed: () {
-          query = '';
-        },
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Column(
+        children: [
+          DrawerHeader(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Theme.of(context).colorScheme.primaryContainer,
+                  Theme.of(context)
+                      .colorScheme
+                      .primaryContainer
+                      .withOpacity(0.7),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.fastfood,
+                  size: 48,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                const SizedBox(width: 20),
+                Text(
+                  'Cooking Up!',
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                ),
+              ],
+            ),
+          ),
+          ListTile(
+            title: Text(
+              'Meals',
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+            leading: Icon(
+              Icons.restaurant,
+              size: 26,
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
+            onTap: () {
+              // onSelectScreen('meals');
+            },
+          ),
+          ListTile(
+            title: Text(
+              'Filters',
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+            leading: Icon(
+              Icons.settings,
+              size: 26,
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
+            onTap: () {
+              // onSelectScreen('filters');
+            },
+          ),
+        ],
       ),
-    ];
-  }
-
-  @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(
-      icon: Icon(Icons.arrow_back),
-      onPressed: () {
-        close(context, '');
-      },
     );
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    // Show search results based on the query
-    return Text('Search Results for: $query');
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    // Show suggestions while typing in the search bar
-    return Text('Suggestions for: $query');
   }
 }

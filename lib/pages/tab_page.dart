@@ -19,6 +19,13 @@ class _TabPageState extends State<TabPage> {
 
   void _selectPage(int index) {
     setState(() {
+      if (index == 2) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const PostAdPage(),
+            ));
+      }
       _selectedPageIndex = index;
     });
   }
@@ -32,10 +39,6 @@ class _TabPageState extends State<TabPage> {
       case 1:
         activePage = const ShopPage();
         activePageTitle = 'Search';
-        break;
-      case 2:
-        activePage = const PostAdPage();
-        activePageTitle = 'Post Your Ads';
         break;
       case 3:
         activePage = const MembershipPage();
