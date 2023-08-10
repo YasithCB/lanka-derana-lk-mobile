@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lanka_derana/presentation/pages/vendors_page.dart';
 
-import '../widgets/homePage/item_view.dart';
+import '../widgets/homePage/ad_post_view.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -49,7 +49,7 @@ class HomePage extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 15),
-        const ItemView(),
+        const ProductView(),
       ],
     );
   }

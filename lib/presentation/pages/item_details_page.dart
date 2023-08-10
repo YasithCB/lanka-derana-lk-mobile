@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:lanka_derana/data/models/item.dart';
-import 'package:intl/intl.dart';
+import 'package:lanka_derana/data/models/ad_post.dart';
+import 'package:lanka_derana/data/models/product_model.dart';
 
-class ItemDetailsPage extends StatelessWidget {
-  const ItemDetailsPage({super.key, required this.item});
+class AdDetailsPage extends StatelessWidget {
+  const AdDetailsPage({super.key, required this.adPost});
 
-  final ProductItem item;
+  final AdPost adPost;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          item.title,
+          'adPost.name',
           style: Theme.of(context).textTheme.titleLarge!.copyWith(
               color: Theme.of(context).colorScheme.onPrimary,
               fontWeight: FontWeight.bold),
@@ -27,9 +27,9 @@ class ItemDetailsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Hero(
-              tag: item.title,
+              tag: 'adPost.name',
               child: Image.asset(
-                item.imageUrl1,
+                'assets/images/items/Nissan FB14.jpg',
                 height: 300,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -42,17 +42,17 @@ class ItemDetailsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    item.title,
+                    'adPost.name',
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           color: Colors.black54,
                           fontWeight: FontWeight.bold,
                         ),
                   ),
                   const SizedBox(height: 8),
-                  Text(
-                    'Posted on ${DateFormat('dd MMM yyyy HH:mm').format(item.createdDate)}',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
+                  // Text(
+                  //   'Posted on ${DateFormat('dd MMM yyyy HH:mm').format(product.createdDate)}',
+                  //   style: Theme.of(context).textTheme.bodySmall,
+                  // ),
                   const SizedBox(height: 2),
                   Text(
                     'Location of poster',
@@ -65,7 +65,7 @@ class ItemDetailsPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Rs  ${item.price}',
+                    'Rs  {adPost.price}',
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.bold,
@@ -78,8 +78,8 @@ class ItemDetailsPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   const Divider(
-                    color: Colors.grey, // Customize the color of the line
-                    thickness: 1.0, // Adjust the thickness of the line
+                    color: Colors.grey, 
+                    thickness: 1.0,
                   ),
                   const SizedBox(height: 8),
                 ],

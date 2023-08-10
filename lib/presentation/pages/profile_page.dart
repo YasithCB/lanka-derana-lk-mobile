@@ -11,41 +11,109 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  bool isLogged = false;
+
   @override
   Widget build(BuildContext context) {
+    Widget content = Column(
+      children: [
+        Center(
+          child: Text(
+            'Welcome to LankaDerana.lk',
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+        ),
+        Text(
+          'Login into manage your account',
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
+        const SizedBox(height: 15),
+        const MobileNumberForm(),
+        const SizedBox(height: 15),
+        Center(
+          child: Text(
+            'OR',
+            style: Theme.of(context).textTheme.bodyMedium!,
+          ),
+        ),
+        const SizedBox(height: 50),
+        LoginWithGoogleButton(
+          onPressed: () {},
+        ),
+        const SizedBox(height: 5),
+        LoginWithFacebookButton(
+          onPressed: () {},
+        ),
+      ],
+    );
+
+    if (isLogged) {
+      //...
+    }
+
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 30),
         child: Column(
           children: [
-            Center(
-              child: Text(
-                'Welcome to LankaDerana.lk',
-                style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-            ),
             Text(
-              'Login into manage your account',
-              style: Theme.of(context).textTheme.bodyMedium,
+              '{User Name}',
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
-            const SizedBox(height: 15),
-            const MobileNumberForm(),
-            const SizedBox(height: 15),
-            Center(
-              child: Text(
-                'OR',
-                style: Theme.of(context).textTheme.bodyMedium!,
-              ),
-            ),
-            const SizedBox(height: 50),
-            LoginWithGoogleButton(
-              onPressed: () {},
-            ),
-            const SizedBox(height: 5),
-            LoginWithFacebookButton(
-              onPressed: () {},
+            ListView(
+              shrinkWrap: true,
+              children: [
+                const ListTile(
+                  leading: Icon(Icons.sell),
+                  title: Text('My Ads'),
+                ),
+                const ListTile(
+                  leading: Icon(Icons.shop),
+                  title: Text('My Membership'),
+                ),
+                const ListTile(
+                  leading: Icon(Icons.star),
+                  title: Text('Favorite'),
+                ),
+                const ListTile(
+                  leading: Icon(Icons.call),
+                  title: Text('Phone Numbers'),
+                ),
+                const SizedBox(height: 15),
+                const Divider(
+                  color: Colors.grey,
+                  thickness: 1,
+                ),
+                const SizedBox(height: 15),
+                TextButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(Icons.power_settings_new_sharp,
+                      color: Color.fromARGB(255, 255, 230, 0)),
+                  label: Text(
+                    'Log Out',
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                  ),
+                ),
+                const SizedBox(height: 15),
+                TextButton.icon(
+                  onPressed: () {
+                    //..
+                  },
+                  icon: const Icon(Icons.settings),
+                  label: const Text('Settings'),
+                  style: TextButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 255, 230, 0),
+                  ),
+                ),
+                const SizedBox(height: 15),
+              ],
             ),
           ],
         ),

@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImageInput extends StatefulWidget {
-  const ImageInput({super.key, required this.onPickImage});
+  const ImageInput({super.key, required this.onPickImage, required this.labelName});
 
   final void Function(File image) onPickImage;
+  final String labelName;
 
   @override
   State<StatefulWidget> createState() {
@@ -44,11 +45,13 @@ class _ImageInput extends State<ImageInput> {
     );
     final List<XFile> images = await picker.pickMultiImage();
 
-    if (image != null) {
-      setState(() {
+    if (image == null) {
+      return;
+    }
+    setState(() {
       _selectedImage = File(image.path);
     });
-    }
+    widget.onPickImage(_selectedImage!);
   }
 
   @override
@@ -56,7 +59,7 @@ class _ImageInput extends State<ImageInput> {
     Widget content = TextButton.icon(
       onPressed: _getFromGallery,
       icon: const Icon(Icons.camera),
-      label: const Text('Take Pictures'),
+      label: Text(widget.labelName),
     );
 
     if (_selectedImage != null) {
@@ -72,8 +75,7 @@ class _ImageInput extends State<ImageInput> {
     }
 
     return Container(
-      height: 250,
-      width: double.infinity,
+      height: 130,
       decoration: BoxDecoration(
         border: Border.all(
           width: 2,

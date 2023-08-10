@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../logic/blocs/category_filter_bloc.dart';
 import '../../../data/models/item.dart';
 
 class FilteredProductsView extends StatelessWidget {
@@ -25,7 +23,7 @@ class FilteredProductsView extends StatelessWidget {
               ),
         ),
       ),
-      body: Center(),
+      body: const Center(),
     );
   }
 }
