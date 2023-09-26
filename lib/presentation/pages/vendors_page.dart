@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lanka_derana/data/models/user.dart';
 import 'package:lanka_derana/data/models/vendor.dart';
+import 'package:lanka_derana/data/services/api_service.dart';
 
 import '../widgets/appvendors/vendor_card.dart';
 
@@ -13,7 +15,15 @@ class VendorsPage extends StatefulWidget {
 }
 
 class _VendorsPageState extends State<VendorsPage> {
-  String _vendorName = '';
+  String _searchedVendorName = '';
+  final ApiService apiService = ApiService();
+  late Future<List<User>> users;
+
+  @override
+  void initState() {
+    super.initState();
+    users = apiService.fetchUsers();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +51,7 @@ class _VendorsPageState extends State<VendorsPage> {
                   child: TextField(
                     onChanged: (value) {
                       setState(() {
-                        _vendorName = value;
+                        _searchedVendorName = value;
                       });
                     },
                     decoration: const InputDecoration(
@@ -62,38 +72,42 @@ class _VendorsPageState extends State<VendorsPage> {
                 ),
               ],
             ),
-            Expanded(
-              child: GridView(
-                padding: const EdgeInsets.symmetric(vertical: 25),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  // childAspectRatio: 2 / 3,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                ),
-                children: [
-                  VendorCard(vendor: Vendor(name: '1000school.Ict.Anu', rating: 0)),
-                  VendorCard(vendor: Vendor(name: 'Aarya Hardware', rating: 2)),
-                  VendorCard(vendor: Vendor(name: 'Abthul Wahid', rating: 5)),
-                  VendorCard(vendor: Vendor(name: 'Acapital.Lands', rating: 4)),
-                  VendorCard(
-                      vendor: Vendor(name: 'Aclankaengineeringservic', rating: 2)),
-                  VendorCard(vendor: Vendor(name: 'Affanariffma', rating: 1)),
-                  VendorCard(vendor: Vendor(name: 'Aarya Hardware', rating: 2)),
-                  VendorCard(vendor: Vendor(name: 'Abthul Wahid', rating: 5)),
-                  VendorCard(vendor: Vendor(name: 'Acapital.Lands', rating: 4)),
-                  VendorCard(
-                      vendor: Vendor(name: 'Aclankaengineeringservic', rating: 2)),
-                  VendorCard(vendor: Vendor(name: 'Affanariffma', rating: 1)),
-                  VendorCard(vendor: Vendor(name: 'Aarya Hardware', rating: 2)),
-                  VendorCard(vendor: Vendor(name: 'Abthul Wahid', rating: 5)),
-                  VendorCard(vendor: Vendor(name: 'Acapital.Lands', rating: 4)),
-                  VendorCard(
-                      vendor: Vendor(name: 'Aclankaengineeringservic', rating: 2)),
-                  VendorCard(vendor: Vendor(name: 'Affanariffma', rating: 1)),
-                ],
-              ),
-            ),
+            FutureBuilder<List<User>>(
+              future: users,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Expanded(child: const Center(child: CircularProgressIndicator()));
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else if (snapshot.hasData) {
+                  List<User> userList = snapshot.data!;
+                  return Expanded(
+                    child: GridView.builder(
+                      padding: const EdgeInsets.symmetric(vertical: 25),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                      ),
+                      itemCount: userList.length,
+                      itemBuilder: (context, index) {
+                        User user = userList[index];
+                        return VendorCard(
+                          vendor: Vendor(
+                            name: user.name,
+                            rating: 0,
+                            sourceUrl: user.avatarUrls,
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                } else {
+                  return const Text('No Sellers available');
+                }
+              },
+            )
           ],
         ),
       ),

@@ -24,8 +24,8 @@ class VendorCard extends StatelessWidget {
             children: [
               Expanded(
                 child: SizedBox(
-                  child: Image.asset(
-                    'assets/images/icon-profile.png',
+                  child: Image.network(
+                    vendor.sourceUrl[2],
                     fit: BoxFit.cover,
                   ),
                 ),

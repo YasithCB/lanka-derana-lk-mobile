@@ -32,7 +32,7 @@ class _TabPageState extends State<TabPage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget activePage = HomePage();
+    Widget activePage = const HomePage();
     var activePageTitle = 'LankaDerana.lk';
 
     switch (_selectedPageIndex) {
@@ -90,14 +90,15 @@ class _TabPageState extends State<TabPage> {
           ),
           BottomNavigationBarItem(
             icon: Container(
-              width: 55,
-              height: 55,
+              width: 50,
+              height: 50,
               decoration: BoxDecoration(
-                color: Colors.yellow,
+                color: const Color.fromRGBO(255, 200, 1, 1.0),
                 borderRadius: BorderRadius.circular(20.0),
               ),
               child: const Icon(
                 Icons.add_circle_rounded,
+                color: Color.fromRGBO(119, 65, 0, 1.0),
                 size: 32,
               ),
             ),

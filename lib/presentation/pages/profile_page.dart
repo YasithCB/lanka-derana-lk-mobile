@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lanka_derana/presentation/pages/vendors_page.dart';
 import '../widgets/profilePage/login_with_fb_button.dart';
 import '../widgets/profilePage/login_with_google_button.dart';
 import '../widgets/profilePage/mobile_number_form.dart';
@@ -83,6 +84,18 @@ class _ProfilePageState extends State<ProfilePage> {
                   leading: Icon(Icons.call),
                   title: Text('Phone Numbers'),
                 ),
+                ListTile(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const VendorsPage(),
+                      ),
+                    );
+                  },
+                  leading: const Icon(Icons.group),
+                  title: const Text('Vendors'),
+                ),
                 const SizedBox(height: 15),
                 const Divider(
                   color: Colors.grey,
@@ -91,8 +104,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 const SizedBox(height: 15),
                 TextButton.icon(
                   onPressed: () {},
-                  icon: const Icon(Icons.power_settings_new_sharp,
-                      color: Color.fromARGB(255, 255, 230, 0)),
+                  icon: const Icon(
+                    Icons.power_settings_new_sharp,
+                    color: Color.fromRGBO(255, 200, 1, 1.0),
+                  ),
                   label: Text(
                     'Log Out',
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
@@ -109,7 +124,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   icon: const Icon(Icons.settings),
                   label: const Text('Settings'),
                   style: TextButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 255, 230, 0),
+                    backgroundColor: const Color.fromRGBO(255, 200, 1, 1.0),
                   ),
                 ),
                 const SizedBox(height: 15),

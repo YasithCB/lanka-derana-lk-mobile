@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:lanka_derana/data/constants/business_hours_option.dart';
+import 'package:lanka_derana/data/dataProviders/category_data.dart';
+import 'package:lanka_derana/data/loaded_data/data.dart';
 import 'package:lanka_derana/presentation/widgets/posting_ad_pageviews/rich_text_area.dart';
 
 import '../../../data/models/category.dart';
@@ -36,79 +38,78 @@ class _BasicInfoFormState extends State<BasicInfoForm> {
   File? _selectedImage5;
 
   String? _selectedDistrict;
+  List<String>? subCategories;
 
   BusinessHoursOption _selectedBusinessHoursOption = BusinessHoursOption.NA;
 
+  @override
+  void initState() {
+    selectCategory();
+    super.initState();
+  }
+
+  void selectCategory() {
+    Category? desiredCategory = categoryList.firstWhere(
+      (category) => category.title == widget.item.title,
+    );
+
+    if (desiredCategory != null) {
+      subCategories = desiredCategory.subCategories;
+    }
+  }
+
   final List<String> customOptions = [
-    'Option 1',
-    'Option 2',
-    'Option 3',
-    'Option 4',
-    'Option 5',
-    'Option 6'
+    'Airconditions & Electrical Fittings ',
+    'Audio& MP3',
+    'Computer Accessories',
+    'Computers & Tablets',
+    'Electronic home Appliances',
+    'Mobile Phone Accessories',
+    'Mobile Phones',
+    'Other Electronics',
+    'TV & Video Accessories',
+    'TVs',
+    'Video Games & Consoles',
   ];
 
   final List<String> _adTypes = [
-    'Option 1',
-    'Option 2',
-    'Option 3',
-    'Option 4',
+    'Buy',
+    'Education',
+    'Exchange',
+    'Job Offer',
+    'Lost & Found',
+    'Need',
+    'Rent',
+    'Rent/ Daily',
+    'Rent/ Monthly',
+    'Repairs',
+    'Sell',
+    'Services',
     // Add more options as needed
   ];
 
   final List<String> _priceTypes = [
-    'Option A',
-    'Option B',
-    'Option C',
+    'Price On Call',
+    'Negotiable',
+    'Fixed',
+    'Free',
     // Add more options as needed
   ];
 
   final List<String> _currencies = [
-    '₨', // Use '\₨' to display ₹
-    '\$', // Use '\$' to display $
-    '€', // Add more currency options as needed
+    'Rs', // Add more currency options as needed
   ];
 
   final List<String> _itemConditions = [
-    'Option A',
-    'Option B',
-    'Option C',
+    'New',
+    'Used',
     // Add more options as needed
   ];
 
   final List<String> _itemWarranties = [
-    'Option A',
-    'Option B',
-    'Option C',
+    'No',
+    'Yes',
     // Add more options as needed
-  ];
-
-  final List<String> _districtsList = [
-    'Ampara',
-    'Anuradhapura',
-    'Badulla',
-    'Batticaloa',
-    'Colombo',
-    'Galle',
-    'Gampaha',
-    'Hambantota',
-    'Jaffna',
-    'Kalutara',
-    'Kandy',
-    'Kegalle',
-    'Kilinochchi',
-    'Kurunegala',
-    'Mannar',
-    'Matale',
-    'Matara',
-    'Monaragala',
-    'Mullaitivu',
-    'Nuwara Eliya',
-    'Polonnaruwa',
-    'Puttalam',
-    'Ratnapura',
-    'Trincomalee',
-    'Vavuniya',
   ];
 
   @override
@@ -132,7 +133,7 @@ class _BasicInfoFormState extends State<BasicInfoForm> {
               _selectedOption = newValue;
             });
           },
-          items: customOptions.map((option) {
+          items: subCategories!.map((option) {
             return DropdownMenuItem<String>(value: option, child: Text(option));
           }).toList(),
         ),
@@ -391,7 +392,7 @@ class _BasicInfoFormState extends State<BasicInfoForm> {
                 _selectedDistrict = newValue!;
               });
             },
-            items: _districtsList.map((option) {
+            items: districts.map((option) {
               return DropdownMenuItem<String>(
                   value: option, child: Text(option));
             }).toList(),
